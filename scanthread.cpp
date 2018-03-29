@@ -123,6 +123,7 @@ void ScanThread::run () {
 
         mxval = pSO2->calcMax(scandat, &satlo, &sathi);
         val = pSO2->processScan (scandat, satlo, sathi) ;
+        emit (setVal(float(val)));
 
         if (mxval > .9 * myspec->maxDN) {
             emit (satAlert(true)) ;

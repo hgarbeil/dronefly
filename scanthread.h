@@ -57,6 +57,7 @@ signals:
     void satAlert (bool) ;
     void scanComplete () ;
     void intChange (int) ;
+    void setVal (float) ;
 public slots:
 
     

@@ -33,7 +33,7 @@ void AutoInt::run () {
 
     int i, iter, j, intLevel=0 ;
     bool foundhigh = false ;
-    double val, dnlimit ;
+    double val, dnlimit, maxval ;
     double *sdat = new double [myspec->spec_length] ;
     dnlimit = multi * myspec->maxDN ;
     QThread::msleep (200) ;
@@ -43,6 +43,7 @@ void AutoInt::run () {
         qDebug () << "I is : "<< i ;
         myspec->setIntegrationTime (intlevels[i]) ;
         statstring->sprintf ("Auto Int at %d", intlevels[i]) ;
+        maxval = -1.E9 ;
         for (iter=0; iter<2; iter++) {
               myspec->getScan (sdat) ;
 
@@ -50,11 +51,16 @@ void AutoInt::run () {
               {
                     val =sdat [j] ;
                     if (val > dnlimit) foundhigh = true ;
+                    if (val > maxval) {
+                        maxval = val ;
+                    }
+
                }
               //if (iter==1) emit (plotData (intlevels[i], sdat)) ;
               QThread::usleep(250000);
 
         }
+        emit (setMax(maxval)) ;
         if (foundhigh) {
             intLevel = i-1 ;
             break ;

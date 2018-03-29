@@ -46,10 +46,15 @@ MainWindow::MainWindow(QWidget *parent) :
     firstFlag = true ;
     calFlag = false ;
     connect (aint, SIGNAL(complete(int)), this, SLOT(autoDone(int))) ;
+    connect (aint, SIGNAL(setMax(float)), this, SLOT(setValueLabel(float))) ;
+    connect (scanthread, SIGNAL(setVal(float)), this, SLOT(setValueLabel(float))) ;
+
 
     qtimer = new QTimer (this) ;
     qtimer->start(1000) ;
     connect (qtimer, SIGNAL(timeout()), this, SLOT(updateGUI())) ;
+    connect (pm, SIGNAL(setCell(int)), this, SLOT(setCellButton(int))) ;
+
 
 
     polarFlag = false ;
@@ -250,4 +255,38 @@ void MainWindow::on_calButton_clicked()
     cscan->start() ;
 
 
+}
+
+
+void MainWindow::setCellButton (int bnum){
+    switch (bnum) {
+        case 0 :
+            ui->cellButton->setText ("Dark") ;
+            break ;
+        case 1 :
+            ui->cellButton->setText ("Low") ;
+            break ;
+        case 2 :
+            ui->cellButton->setText ("High") ;
+            break ;
+        case 3 :
+            ui->cellButton->setText ("Ref") ;
+            break ;
+    }
+}
+
+void MainWindow::setValueLabel (float val) {
+    int ival = int(val) ;
+    QString str = QString("%1").arg(ival) ;
+    ui->valueLabel->setText(str) ;
+}
+
+void MainWindow::on_insLowButton_clicked()
+{
+    scanthread->insertCell (0,10) ;
+}
+
+void MainWindow::on_insHighButton_clicked()
+{
+    scanthread->insertCell (1,10) ;
 }

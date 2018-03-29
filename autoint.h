@@ -28,6 +28,7 @@ protected:
 signals:
     void plotData(int, double *);
     void complete (int intlevel) ;
+    void setMax (float) ;
 public slots:
     
 };

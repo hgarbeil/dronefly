@@ -49,6 +49,10 @@ private slots :
     void on_aintButton_clicked();
     void on_scanButton_clicked();
     void on_calButton_clicked();
+    void setCellButton (int) ;
+    void setValueLabel (float) ;
+    void on_insLowButton_clicked();
+    void on_insHighButton_clicked();
 };
 
 #endif // MAINWINDOW_H

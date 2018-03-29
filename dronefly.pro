@@ -64,6 +64,6 @@ HEADERS  += mainwindow.h \
 FORMS    += mainwindow.ui \
     repeatscandialog.ui
 
-INCLUDEPATH += /home/pi/workdir/seabreeze-3.0.11/SeaBreeze/include
+INCLUDEPATH += /home/pi/workdir/SeaBreeze/include
 INCLUDEPATH += ./polyfitd
-LIBS += -L/home/pi/workdir/seabreeze-3.0.11/SeaBreeze/lib -lseabreeze -lphidget21 -lusb
+LIBS += -L/home/pi/workdir/SeaBreeze/lib -lseabreeze -lphidget21 -lusb
