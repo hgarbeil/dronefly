@@ -6,7 +6,7 @@ QGPSDevice::QGPSDevice(QObject *parent) :
     QObject(parent)
 {
     qsport = new QSerialPort (this) ;
-    qsport->setPortName ("/dev/ttyUSB0") ;
+    qsport->setPortName ("/dev/ttyS0") ;
 
     indata = new QByteArray () ;
     indata->reserve (1280) ;

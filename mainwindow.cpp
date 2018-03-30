@@ -14,7 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
     myspec->initSpec() ;
     myspec->setIntLevel (2) ;
     gps = new QGPSDevice (this) ;
-    gps->setPort ("/dev/ttyUSB0") ;
+    gps->setPort ("/dev/ttyS0") ;
     //gps->init() ;
     pm = new phidgetsMot () ;
     pso2 = new ProcessSO2 () ;
@@ -53,7 +53,7 @@ MainWindow::MainWindow(QWidget *parent) :
     qtimer = new QTimer (this) ;
     qtimer->start(1000) ;
     connect (qtimer, SIGNAL(timeout()), this, SLOT(updateGUI())) ;
-    connect (pm, SIGNAL(setCell(int)), this, SLOT(setCellButton(int))) ;
+    connect (pm, SIGNAL(cellState(int)), this, SLOT(setCellButton(int))) ;
 
 
 
@@ -61,6 +61,7 @@ MainWindow::MainWindow(QWidget *parent) :
     voltOnlyFlag = true ;
 
     scanState = false ;
+
 
 
 }
@@ -270,7 +271,7 @@ void MainWindow::setCellButton (int bnum){
             ui->cellButton->setText ("High") ;
             break ;
         case 3 :
-            ui->cellButton->setText ("Ref") ;
+            ui->cellButton->setText ("Clear") ;
             break ;
     }
 }
